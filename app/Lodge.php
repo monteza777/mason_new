@@ -9,7 +9,5 @@ class Lodge extends Model
     use Notifiable;
     protected $fillable = ['lodge_name', 'lodge_address', 'contact_number', 'has_image'];
 
-    public function user(){
-    	return $this->belongsTo('App\User');
-    }
+    
 }

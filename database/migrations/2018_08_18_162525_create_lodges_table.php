@@ -17,8 +17,9 @@ class CreateLodgesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('lodge_name')->nullable();
+            $table->string('lodge_master')->nullable();
             $table->string('lodge_address')->nullable();
-            $table->string('contact_number')->nullable();
+            $table->string('lodge_contact_number')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

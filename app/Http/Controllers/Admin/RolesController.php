@@ -18,9 +18,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('role_access')) {
+        /*if (! Gate::allows('role_access')) {
             return abort(401);
-        }
+        }*/
 
 
                 $roles = Role::all();
@@ -35,9 +35,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('role_create')) {
+        /*if (! Gate::allows('role_create')) {
             return abort(401);
-        }
+        }*/
         return view('admin.roles.create');
     }
 

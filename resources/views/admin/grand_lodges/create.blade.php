@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.lodges.title')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.lodges.store']]) !!}
+    <h3 class="page-title">@lang('quickadmin.grand_lodges.title')</h3>
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.grand_lodges.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,7 +12,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('lodge_name', trans('quickadmin.lodges.fields.lodge_name').'*', ['class' => 'control-label']) !!}
+                    {!! Form::label('lodge_name', trans('quickadmin.grand_lodges.fields.lodge_name').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('lodge_name', old('lodge_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('lodge_name'))
@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('lodge_address', trans('quickadmin.lodges.fields.lodge_address').'*', ['class' => 'control-label']) !!}
+                    {!! Form::label('lodge_address', trans('quickadmin.grand_lodges.fields.lodge_address').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('lodge_address', old('lodge_address'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('lodge_address'))
@@ -36,12 +36,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('lodge_contact_number', trans('quickadmin.lodges.fields.lodge_contact_number').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('contact_number', old('contact_number'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('lodge_contact_number', trans('quickadmin.grand_lodges.fields.lodge_contact_number').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('lodge_contact_number', old('lodge_contact_number'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('contact_number'))
+                    @if($errors->has('lodge_contact_number'))
                         <p class="help-block">
-                            {{ $errors->first('contact_number') }}
+                            {{ $errors->first('lodge_contact_number') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('lodge_master', trans('quickadmin.grand_lodges.fields.lodge_master').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('lodge_master', old('lodge_master'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('lodge_master'))
+                        <p class="help-block">
+                            {{ $errors->first('lodge_master') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('lodge_secretary', trans('quickadmin.grand_lodges.fields.lodge_secretary').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('lodge_secretary', old('lodge_secretary'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('lodge_secretary'))
+                        <p class="help-block">
+                            {{ $errors->first('lodge_secretary') }}
                         </p>
                     @endif
                 </div>
@@ -52,21 +76,21 @@
     
         <div class="panel panel-default">
         <div class="panel-heading">
-            Users
+            District Lodge
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('quickadmin.users.fields.name')</th>
-                        <th>@lang('quickadmin.users.fields.email')</th>
+                    <th>@lang('quickadmin.district_lodges.fields.lodge_name')</th>
+                        <th>@lang('quickadmin.district_lodges.fields.lodge_address')</th>
                         
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody id="users">
-                    @foreach(old('users', []) as $index => $data)
-                        @include('admin.lodges.lodge_row', [
+                    @foreach(old('lodges', []) as $index => $data)
+                        @include('admin.grand_lodges.district_lodges_row', [
                             'index' => $index
                         ])
                     @endforeach
@@ -76,7 +100,7 @@
         </div>
     </div>
     {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
-    <a href="{{ route('admin.lodges.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
+    <a href="{{ route('admin.grand_lodges.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
     {!! Form::close() !!}
 @stop
 
@@ -84,7 +108,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.lodges.lodge_row',
+        @include('admin.grand_lodges.district_lodges_row',
                 [
                     'index' => '_INDEX_',
                 ])

@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
     Route::resource('user_actions', 'Admin\UserActionsController');
     Route::resource('posts', 'PostController');
+    Route::resource('grand_lodges', 'Admin\GrandLodgesController');
     Route::resource('lodges', 'Admin\LodgeController');
     
 });

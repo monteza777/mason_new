@@ -58,12 +58,36 @@ return [
 			'end' => 'End Date',
 		],
 	],
+	'grand_lodges' => [
+		'title' => 'Grand Lodge',
+		'list' => 'Grand Lodge List',
+		'fields' => [
+			'lodge_name' => 'Grand Lodge Name',
+			'lodge_address' => 'Grand Lodge Address',
+			'lodge_master' => 'Grand Lodge Master',
+			'lodge_secretary' => 'Grand Lodge Secretary',
+			'lodge_contact_number' => 'Grand Contact Number',
+			'lodge_image' => 'Image',
+		],
+	],
+	'district_lodges' => [
+		'title' => 'District Lodges',
+		'list' => 'District Lodges List',
+		'fields' => [
+			'lodge_name' => 'Lodge Name',
+			'lodge_address' => 'Lodge Address',
+			'lodge_master' => 'Lodge Master',
+			'lodge_contact_number' => 'Contact Number',
+			'lodge_image' => 'Image',
+		],
+	],
 	'lodges' => [
 		'title' => 'Lodges',
 		'list' => 'Lodges List',
 		'fields' => [
 			'lodge_name' => 'Lodge Name',
 			'lodge_address' => 'Lodge Address',
+			'lodge_master' => 'Lodge Master',
 			'lodge_contact_number' => 'Contact Number',
 			'lodge_image' => 'Image',
 		],

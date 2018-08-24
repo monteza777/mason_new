@@ -19,7 +19,7 @@ use Hash;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $fillable = ['name', 'email', 'password','lodges','remember_token', 'role_id'];
+    protected $fillable = ['name', 'email', 'password','remember_token', 'role_id'];
     protected $hidden = ['password', 'remember_token'];
     
     
@@ -64,7 +64,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
-    public function lodges(){
-        return $this->hasMany('App\Lodge');
-    }
+    
+
 }
