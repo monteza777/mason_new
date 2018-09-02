@@ -37,11 +37,11 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('lodge_contact_number', trans('quickadmin.lodges.fields.lodge_contact_number').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('contact_number', old('contact_number'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('lodge_contact_number', old('lodge_contact_number'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('contact_number'))
+                    @if($errors->has('lodge_contact_number'))
                         <p class="help-block">
-                            {{ $errors->first('contact_number') }}
+                            {{ $errors->first('lodge_contact_number') }}
                         </p>
                     @endif
                 </div>

@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('user_actions', 'Admin\UserActionsController');
     Route::resource('posts', 'PostController');
     Route::resource('grand_lodges', 'Admin\GrandLodgesController');
+    // Route::get('/admin/grand_lodges/{id}/create', 'Admin\GrandLodgesController@create');
     Route::resource('lodges', 'Admin\LodgeController');
     
 });

@@ -82,17 +82,25 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('quickadmin.district_lodges.fields.lodge_name')</th>
+                    <th>@lang('quickadmin.grand_lodges.fields.name')</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody id="users">
-                    @foreach(old('lodges', []) as $index => $data)
-                        @include('admin.grand_lodges.district_lodges_row', [
+                    @forelse(old('lodge', []) as $index => $data)
+                        @include('admin.grand_lodges.disrict_lodges_row', [
                             'index' => $index
                         ])
-                    @endforeach
+                    @empty
+                        @foreach($role->users as $item)
+                            @include('admin.grand_lodges.disrict_lodges_row', [
+                                'index' => 'id-' . $item->id,
+                                'field' => $item
+                            ])
+                        @endforeach
+                    @endforelse
                 </tbody>
+            </table>
             </table>
             <a href="#" class="btn btn-success pull-right add-new">@lang('quickadmin.qa_add_new')</a>
         </div>
@@ -106,7 +114,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.grand_lodges.district_lodges_row',
+        @include('admin.grand_lodges.district_lodges_row_edit',
                 [
                     'index' => '_INDEX_',
                 ])

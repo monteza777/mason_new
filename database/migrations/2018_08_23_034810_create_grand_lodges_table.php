@@ -15,11 +15,11 @@ class CreateGrandLodgesTable extends Migration
     {
         Schema::create('grand_lodges', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('lodge_name');
-            $table->string('lodge_address');
-            $table->string('lodge_master');
-            $table->string('lodge_secretary');
-            $table->string('lodge_contact_number');
+            $table->string('lodge_name')->nullable();
+            $table->string('lodge_address')->nullable();
+            $table->string('lodge_master')->nullable();
+            $table->string('lodge_secretary')->nullable();
+            $table->string('lodge_contact_number')->nullable();
             $table->timestamps();
         });
     }

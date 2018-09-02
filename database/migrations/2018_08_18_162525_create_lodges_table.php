@@ -15,7 +15,7 @@ class CreateLodgesTable extends Migration
     {
         Schema::create('lodges', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->string('lodge_name')->nullable();
             $table->string('lodge_master')->nullable();
             $table->string('lodge_address')->nullable();

@@ -42,7 +42,7 @@
 
                                 <td field-key='name'>{{ $lodge->lodge_name }}</td>
                                 <td field-key='email'>{{ $lodge->lodge_address }}</td>
-                                <td field-key='role'>{{ $lodge->contact_number }}</td>
+                                <td field-key='role'>{{ $lodge->lodge_contact_number }}</td>
                                     <td>
                                     @can('user_view')
                                     <a href="{{ route('admin.lodges.show',[$lodge->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>

@@ -1,7 +1,8 @@
 <tr data-index="{{ $index }}">
-    <td>{!! Form::text('lodges['.$index.'][lodge_name]', old('lodges['.$index.'][lodge_name]', isset($field) ? $field->lodge_name: ''), ['class' => 'form-control']) !!}</td>
-<td>{!! Form::text('lodges['.$index.'][lodge_address]', old('lodges['.$index.'][lodge_address]', isset($field) ? $field->lodge_address: ''), ['class' => 'form-control']) !!}</td>
-
+	<td>
+	{!! Form::select('district_lodges['.$index.'][grand_lodge_id]', $district_lodges,
+		old('district_lodges['.$index.'][grand_lodge_id]', isset($field) ? $field->grand_lodge_id: ''), ['class' => 'form-control select2']) !!}
+	</td>
     <td>
         <a href="#" class="remove btn btn-xs btn-danger">@lang('quickadmin.qa_delete')</a>
     </td>
