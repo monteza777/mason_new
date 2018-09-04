@@ -93,7 +93,12 @@
                         <a href="{{ route('admin.grand_lodges.index') }}">
                             <i class="fa fa-th-list"></i>
                             <span>@lang('quickadmin.grand_lodges.list')</span>
-                        </a><a href="{{ route('admin.lodges.index') }}">
+                        </a>
+                        <a href="{{ route('admin.district_lodges.index') }}">
+                            <i class="fa fa-th-list"></i>
+                            <span>@lang('quickadmin.district_lodges.list')</span>
+                        </a>
+                        <a href="{{ route('admin.lodges.index') }}">
                             <i class="fa fa-th-list"></i>
                             <span>@lang('quickadmin.lodges.list')</span>
                         </a>

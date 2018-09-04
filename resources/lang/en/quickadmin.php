@@ -77,6 +77,7 @@ return [
 			'lodge_name' => 'Lodge Name',
 			'lodge_address' => 'Lodge Address',
 			'lodge_master' => 'Lodge Master',
+			'lodge_secretary' => 'Lodge Secretary',
 			'lodge_contact_number' => 'Contact Number',
 			'lodge_image' => 'Image',
 		],

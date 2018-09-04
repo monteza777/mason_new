@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
-use App\GrandLodge;
 use App\Districtlodge;
-class GrandLodgesController extends Controller
+
+class DistrictController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class GrandLodgesController extends Controller
         if (! Gate::allows('user_access')) {
             return abort(401);
         }
-        $lodges = GrandLodge::all();
-        return view('admin.grand_lodges.index',compact('lodges'));
+        $lodges = DistrictLodge::all();
+        return view('admin.district_lodges.index',compact('lodges'));
     }
 
     /**
@@ -30,28 +30,24 @@ class GrandLodgesController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('user_create')) {
-            return abort(401);
-        }
-        $grand_lodges = GrandLodge::all();
-        $district_lodges = \App\Districtlodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $district_lodges = Districtlodge::all();
+        $lodges = \App\Lodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         $data = [
-            'grand_lodges'=> $grand_lodges,
-            'district_lodges'=> $district_lodges
+            'district_lodges'=> $district_lodges,
+            'lodges'=> $lodges
         ];
-        return view('admin.grand_lodges.create')->with($data);
+        return view('admin.district_lodges.create')->with($data);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $grand_lodge = GrandLodge::create($request->all());
-        $district_lodges   = $grand_lodge->district_lodges;
-        $currentUserData = [];
-        $district_id = $request->input('district_lodges');
-        if($request->input('district_lodges') != ''){
-        Districtlodge::whereIn('id',$district_id)->update(['grand_lodge_id'=> $grand_lodge->id]);
-        } 
-        return redirect()->route('admin.grand_lodges.index');
+        //
     }
 
     /**
@@ -73,14 +69,7 @@ class GrandLodgesController extends Controller
      */
     public function edit($id)
     {
-        
-        $grand_lodges = GrandLodge::findOrFail($id);
-        $district_lodges = \App\Districtlodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-        $data = [
-            'grand_lodges'=> $grand_lodges,
-            'district_lodges'=> $district_lodges
-        ];
-        return view('admin.grand_lodges.edit')->with($data);
+        //
     }
 
     /**
