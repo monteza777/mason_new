@@ -33,20 +33,17 @@ class GrandLodgesController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
-        $grand_lodges = GrandLodge::all();
-        $district_lodges = \App\Districtlodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-        $data = [
-            'grand_lodges'=> $grand_lodges,
-            'district_lodges'=> $district_lodges
-        ];
-        return view('admin.grand_lodges.create')->with($data);
+        $district_lodges = \App\Districtlodge::get()
+                        ->pluck('lodge_name', 'id')
+                        ->prepend(trans('quickadmin.qa_please_select'), '');
+                        
+        return view('admin.grand_lodges.create',compact('district_lodges'));
     }
 
     public function store(Request $request)
     {
         $grand_lodge = GrandLodge::create($request->all());
-        $district_lodges   = $grand_lodge->district_lodges;
-        $currentUserData = [];
+        //update foreign key of childs
         $district_id = $request->input('district_lodges');
         if($request->input('district_lodges') != ''){
         Districtlodge::whereIn('id',$district_id)->update(['grand_lodge_id'=> $grand_lodge->id]);

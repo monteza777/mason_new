@@ -2,7 +2,7 @@
 
 @section('content')
     <h3 class="page-title">@lang('quickadmin.district_lodges.title')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.district_lodges.store']]) !!}
+    {!! Form::model($lodges, ['method' => 'PUT', 'route' => ['admin.district_lodges.update', $lodges->id]]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,6 +12,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::hidden('lodge_name', $lodges->id) !!}
                     {!! Form::label('lodge_name', trans('quickadmin.district_lodges.fields.lodge_name').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('lodge_name', old('lodge_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '' ]) !!}
                     <p class="help-block"></p>
@@ -87,11 +88,18 @@
                 </tr>
                 </thead>
                 <tbody id="users">
-                    @foreach(old('lodges', []) as $index => $data)
-                        @include('admin.district_lodges.lodges_row', [
-                            'index' => $index,
-                        ])
-                    @endforeach
+                    @forelse(old('lodges',[]) as $index => $data)
+                        @include('admin.district_lodges.edit_lodges_row',[
+                                'index' => $index
+                            ])
+                    @empty
+                        @foreach($lodges->lodges as $item)
+                            @include('admin.district_lodges.edit_lodges_row', [
+                                'index' => 'id-' . $item->id,
+                                'field' => $item
+                            ])
+                        @endforeach
+                    @endforelse
                 </tbody>
             </table>
             <a href="#" class="btn btn-success pull-right add-new">@lang('quickadmin.qa_add_new')</a>
@@ -106,7 +114,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.district_lodges.lodges_row',
+        @include('admin.district_lodges.edit_lodges_row',
                 [
                     'index' => '_INDEX_',
                 ])

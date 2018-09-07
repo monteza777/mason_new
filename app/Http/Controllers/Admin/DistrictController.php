@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Districtlodge;
-
+use App\Lodge;
 class DistrictController extends Controller
 {
     /**
@@ -23,73 +23,57 @@ class DistrictController extends Controller
         return view('admin.district_lodges.index',compact('lodges'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $district_lodges = Districtlodge::all();
         $lodges = \App\Lodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-        $data = [
-            'district_lodges'=> $district_lodges,
-            'lodges'=> $lodges
-        ];
-        return view('admin.district_lodges.create')->with($data);
+        return view('admin.district_lodges.create',compact('lodges'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if (! Gate::allows('user_access')) {
+            return abort(401);
+        }
+        $d_lodge = Districtlodge::create($request->all());
+        $lodge_id = $request->input('lodges');
+        if($request->input('lodges') != ''){
+        Lodge::whereIn('id',$lodge_id)->update(['district_lodge_id'=> $d_lodge->id]);
+        } 
+        return redirect()->route('admin.district_lodges.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        if (! Gate::allows('user_edit')) {
+            return redirect()->route('admin.district_lodges.index');
+        }
+        $lodges = Districtlodge::findorFail($id);
+        $c_lodges = \App\Lodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $data = [
+            'lodges'=> $lodges,
+            'c_lodges'=> $c_lodges
+        ];
+        return view('admin.district_lodges.edit')->with($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $lodge = Districtlodge::findOrFail($id);
+        $lodge->update($request->all());
+
+        $lodge_id = $request->input('lodges');
+        if($request->input('lodges') != ''){
+        Lodge::whereIn('id',$lodge_id)->update(['district_lodge_id'=> $id]);
+        }
+        return redirect()->route('admin.district_lodges.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //
