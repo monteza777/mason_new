@@ -64,6 +64,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function lodges(){
+        return $this->belongsTo(Lodge::class,'lodge_id');
+    }
     
 
 }

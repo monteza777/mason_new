@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.district_lodges.title')</h3>
+    <h3 class="page-title">@lang('quickadmin.district_lodges.create')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['admin.district_lodges.store']]) !!}
 
     <div class="panel panel-default">
@@ -76,7 +76,7 @@
     
         <div class="panel panel-default">
         <div class="panel-heading">
-            District Lodge
+            District Grand Lodge
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">

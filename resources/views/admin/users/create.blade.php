@@ -48,18 +48,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('lodges', trans('quickadmin.users.fields.lodges').'*', ['class' => 'control-label']) !!}
-                    {!! Form::select('lodges', $lodges, old('lodges'), ['class' => 'form-control select2', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('lodges'))
-                        <p class="help-block">
-                            {{ $errors->first('lodges') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('role_id', trans('quickadmin.users.fields.role').'*', ['class' => 'control-label']) !!}
                     {!! Form::select('role_id', $roles, old('role_id'), ['class' => 'form-control select2', 'required' => '']) !!}
                     <p class="help-block"></p>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.lodges.title')</h3>
+    <h3 class="page-title">@lang('quickadmin.lodges.create')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['admin.lodges.store']]) !!}
 
     <div class="panel panel-default">
@@ -46,11 +46,35 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('lodge_master', trans('quickadmin.lodges.fields.lodge_master').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('lodge_master', old('lodge_master'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('lodge_master'))
+                        <p class="help-block">
+                            {{ $errors->first('lodge_master') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('lodge_secretary', trans('quickadmin.lodges.fields.lodge_secretary').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('lodge_secretary', old('lodge_secretary'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('lodge_secretary'))
+                        <p class="help-block">
+                            {{ $errors->first('lodge_secretary') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>
     
-        <div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading">
             Users
         </div>
@@ -58,15 +82,13 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('quickadmin.users.fields.name')</th>
-                        <th>@lang('quickadmin.users.fields.email')</th>
-                        
+                    <th>@lang('quickadmin.lodges.fields.lodge_name')</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody id="users">
                     @foreach(old('users', []) as $index => $data)
-                        @include('admin.lodges.lodge_row', [
+                        @include('admin.lodges.users_row', [
                             'index' => $index
                         ])
                     @endforeach
@@ -84,7 +106,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.lodges.lodge_row',
+        @include('admin.lodges.users_row',
                 [
                     'index' => '_INDEX_',
                 ])
@@ -106,5 +128,5 @@
             row.remove();
             return false;
         });
-        </script>
+    </script>
 @stop

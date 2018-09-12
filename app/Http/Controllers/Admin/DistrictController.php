@@ -44,7 +44,14 @@ class DistrictController extends Controller
 
     public function show($id)
     {
-        //
+        if (! Gate::allows('user_view')) {
+            return abort(401);
+        }
+        
+        $d_lodges = Districtlodge::findOrFail($id);
+        $lodge = \App\Lodge::where('district_lodge_id', $id)->get();
+
+        return view('admin.district_lodges.show', compact('d_lodges','lodge'));
     }
 
     public function edit($id)
