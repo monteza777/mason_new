@@ -30,6 +30,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('district_lodges', 'Admin\DistrictController');
     // Route::get('/admin/grand_lodges/{id}/create', 'Admin\GrandLodgesController@create');
     Route::resource('lodges', 'Admin\LodgeController');
-    
+    Route::resource('lodge_users', 'Admin\LodgeUserController');
 });
 Route::resource('events', 'EventController');
