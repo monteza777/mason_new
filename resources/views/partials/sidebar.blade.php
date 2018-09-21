@@ -49,9 +49,10 @@
                     </li>@endcan
                     
                 </ul>
-            </li>@endcan
+            </li>
+            @endcan
 
-             <li class="treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-calendar"></i>
                     <span>@lang('quickadmin.users.calendar')</span>
@@ -74,33 +75,71 @@
                             <span>@lang('quickadmin.users.calendar')</span>
                         </a>
                     </li>
-                    
                 </ul>
             </li>
-            
+
+{{-- Lodges List --}}
+
             @can('user_management_access')
             <li class="treeview">
-                <a href="#usersnav">
-                    <i class="fa fa-th-list"></i>
+                <a href="#lodges">
+                    <i class="fa fa-users"></i>
                     <span>@lang('quickadmin.lodges.title')</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu" id='usersnav'>
+                <ul class="treeview-menu" id='lodges'>
                     @can('user_action_access')
                     <li>
                         <a href="{{ route('admin.district_lodges.index') }}">
-                            <i class="fa fa-th-list"></i>
+                            <i class="fa fa-list"></i>
                             <span>@lang('quickadmin.district_lodges.list')</span>
                         </a>
+                    </li>
+                    @endcan
+                    @can('user_action_access')
+                    <li>
                         <a href="{{ route('admin.lodges.index') }}">
-                            <i class="fa fa-th-list"></i>
+                            <i class="fa fa-list"></i>
                             <span>@lang('quickadmin.lodges.list')</span>
                         </a>
+                    </li>
+                    @endcan
+                    
+                    @can('user_action_access')
+                    <li>
+                        <a href="{{ route('admin.lodge_users.index') }}">
+                            <i class="fa fa-user"></i>
+                            <span>@lang('quickadmin.lodge_users.list')</span>
+                        </a>
                     </li>@endcan
+                    
                 </ul>
-            </li>@endcan
+            </li>
+            @endcan
+{{--End of Lodges list  --}}
+            @can('user_management_access')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th-list"></i>
+                    <span>@lang('quickadmin.financial_reports.title')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @can('user_action_access')
+                    <li>
+                        <a href="{{ route('admin.financial_reports.index') }}">
+                            <i class="fa fa-th-list"></i>
+                            <span>@lang('quickadmin.financial_reports.list')</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
             {{-- Change Password & Log-out --}}
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">

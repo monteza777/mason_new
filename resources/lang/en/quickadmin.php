@@ -97,17 +97,24 @@ return [
 			'lodge_image' => 'Image',
 		],
 	],
-	'lodge_user' => [
-		'title' => 'Assign Lodge',
-		'create' => 'Assign Lodge',
-		'list' => 'Lodges User',
+	'lodge_users' => [
+		'title' => 'Assign Member',
+		'create' => 'Assign Member',
+		'list' => 'Assign Member',
 		'fields' => [
+			'name' => 'Name',
+			'email' => 'Email',
 			'lodge_name' => 'Lodge Name',
-			'lodge_address' => 'Lodge Address',
-			'lodge_contact_number' => 'Contact Number',
-			'lodge_master' => 'Lodge Master',
-			'lodge_secretary' => 'Lodge Secretary',
-			'lodge_image' => 'Image',
+		],
+	],
+	'financial_reports' => [
+		'title' => 'Financial Report',
+		'create' => 'Create',
+		'list' => 'Financial Report List',
+		'fields' => [
+			'report_title' => 'Report Title',
+			'report_content' => 'Report Content',
+			'official' => 'Official',
 		],
 	],
 	'qa_home' => 'Home',

@@ -65,8 +65,7 @@ class User extends Authenticatable
     }
 
     public function lodges(){
-        return $this->belongsTo(Lodge::class,'lodge_id');
+        return $this->belongsToMany(Lodge::class,'lodge_users','user_id','lodge_id');
     }
     
-
 }

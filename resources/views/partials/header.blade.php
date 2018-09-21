@@ -12,7 +12,7 @@
            data-target=".navbar-collapse">
         </a>
 
-        <div class="top-menu">
+        <div class="top-menu navbar-collapse">
             <ul class="nav navbar-nav pull-right">
                 
             </ul>

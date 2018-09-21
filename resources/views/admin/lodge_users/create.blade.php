@@ -2,7 +2,7 @@
 
 @section('content')
     <h3 class="page-title">@lang('quickadmin.lodges.create')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.lodges.store']]) !!}
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.lodge_users.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -39,7 +39,7 @@
                 </thead>
                 <tbody id="users">
                     @foreach(old('users', []) as $index => $data)
-                        @include('admin.lodges.users_row', [
+                        @include('admin.lodge_users.users_row', [
                             'index' => $index
                         ])
                     @endforeach
@@ -57,7 +57,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.lodges.users_row',
+        @include('admin.lodge_users.users_row',
                 [
                     'index' => '_INDEX_',
                 ])

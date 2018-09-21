@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\Admin\Attach;
+use App\Lodge_user;
 use App\Lodge;
 use App\User;
 
@@ -17,7 +19,12 @@ class LodgeUserController extends Controller
      */
     public function index()
     {
-        //
+        if (! Gate::allows('user_access')) {
+            return abort(401);
+        }
+        $users = User::with('lodges')->get();
+        
+        return view('admin.lodge_users.index', compact('users'));
     }
 
     /**
@@ -50,8 +57,17 @@ class LodgeUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        /*if (! Gate::allows('role_create')) {
+            return abort(401);
+        }*/
+        // $test = $request->lodges;
+        $lodge = Lodge::find($request->lodges);
+        foreach ($request->input('users', []) as $data) {
+            $lodge->users()->attach($data);
+        }
+        // dd($test);
+        return redirect()->route('admin.lodge_users.index');
     }
 
     /**

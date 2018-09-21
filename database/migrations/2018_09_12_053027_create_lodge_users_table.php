@@ -15,6 +15,8 @@ class CreateLodgeUsersTable extends Migration
     {
         Schema::create('lodge_users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('lodge_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateLodgeUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lodge_users');
+        Schema::dropIfExists('lodge_user');
     }
 }

@@ -14,6 +14,6 @@ class Lodge extends Model
     }
 
     public function users(){
-    	return $this->hasMany('App\User');
+    	return $this->belongsToMany(User::class,'lodge_users','lodge_id','user_id');
     }
 }
