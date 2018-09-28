@@ -49,7 +49,7 @@
         </div>
     </div>
     {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
-    <a href="{{ route('admin.lodges.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
+    <a href="{{ route('admin.lodge_users.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
     {!! Form::close() !!}
 @stop
 

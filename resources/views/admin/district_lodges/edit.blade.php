@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('lodge_master', trans('quickadmin.district_lodges.fields.lodge_master').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('lodge_master', old('lodge_master'), ['class' => 'form-control', 'placeholder' => '',  'required' => '']) !!}
+                    {!! Form::select('lodge_master',$users,null, array('class'=>'form-control')) !!}
                     <p class="help-block"></p>
                     @if($errors->has('lodge_master'))
                         <p class="help-block">
@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('lodge_secretary', trans('quickadmin.district_lodges.fields.lodge_secretary').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('lodge_secretary', old('lodge_secretary'), ['class' => 'form-control', 'placeholder' => '', 'required' => '' ]) !!}
+                    {!! Form::select('lodge_secretary',$users,null, array('class'=>'form-control')) !!}
                     <p class="help-block"></p>
                     @if($errors->has('lodge_secretary'))
                         <p class="help-block">
@@ -77,7 +77,7 @@
     
         <div class="panel panel-default">
         <div class="panel-heading">
-            District Lodge
+            Lodges
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">

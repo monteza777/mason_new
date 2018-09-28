@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\FinancialReport;
+use Auth;
+use User;
 
 class FinancialReportController extends Controller
 {
@@ -15,8 +17,11 @@ class FinancialReportController extends Controller
         if (! Gate::allows('user_access')) {
             return abort(401);
         }
-        $freport = FinancialReport::all();
-        return view('admin.financial_reports.index',compact('freport'));
+        $freport = FinancialReport::where('submit',0)->get();
+        $users = User::with('lodges')->get();
+        return view('admin.financial_reports.index',compact('freport','users'));
+
+        
     }
 
     public function create()
@@ -29,7 +34,13 @@ class FinancialReportController extends Controller
         if (! Gate::allows('user_access')) {
             return abort(401);
         }
-        $d_lodge = FinancialReport::create($request->all());
+        // $d_lodge = FinancialReport::create($request->all());
+        $report_data = [
+            'report_title' => $request->input('report_title'),
+            'report_content' => $request->input('report_content'),
+            'user_id'=> Auth::id(),
+        ];
+        FinancialReport::create($report_data);
         return redirect()->route('admin.financial_reports.index');
     }
 
@@ -39,6 +50,7 @@ class FinancialReportController extends Controller
             return abort(401);
         }
         $reports = FinancialReport::findOrFail($id);
+
         return view('admin.financial_reports.show', compact('reports'));
 
     }
@@ -57,7 +69,8 @@ class FinancialReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /*FinancialReport::where('id',$id)->update(['submit'=>true]);
+        return redirect()->route('admin.financial_reports.index');*/
     }
 
     /**
@@ -69,5 +82,10 @@ class FinancialReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function submit(Request $request,$id){
+        FinancialReport::where('id',$id)->update(['submit'=>true]);
+        return redirect()->route('admin.financial_reports.index');
     }
 }

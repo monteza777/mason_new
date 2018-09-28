@@ -19,7 +19,9 @@ class CreateFinancialReportsTable extends Migration
             $table->softDeletes();
             $table->string('report_title')->nullable();
             $table->string('report_content',10000)->nullable();
+            $table->integer('user_id')->nullable();
             $table->boolean('official')->default('0');
+            $table->boolean('submit')->default('0');
         });
     }
 

@@ -118,34 +118,62 @@
                 </ul>
             </li>
             @endcan
-{{--End of Lodges list  --}}
+{{-- Financial Reports  --}}
             @can('user_management_access')
             <li class="treeview">
-                <a href="#">
+                <a href="#reports1">
                     <i class="fa fa-th-list"></i>
-                    <span>@lang('quickadmin.financial_reports.title')</span>
+                    <span>Reports</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu">
+                {{-- SIMPLE REPORTS --}}
+                <ul class="treeview-menu" id='reports1'>
                     @can('user_action_access')
-                    <li>
-                        <a href="{{ route('admin.financial_reports.index') }}">
+                        <li class="treeview">
+                        <a href="#simple_reports">
                             <i class="fa fa-th-list"></i>
-                            <span>@lang('quickadmin.financial_reports.list')</span>
+                            <span>DRAFT REPORTS</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                            <ul class="treeview-menu" id='simple_reports'>
+                                <li>
+                                    <a href="{{ route('admin.financial_reports.index') }}">
+                                        <i class="fa fa-th-list"></i>
+                                        <span>@lang('quickadmin.financial_reports.list')</span>
+                                    </a>
+                                </li>
+                            </ul>
+                    </li>
+                    @endcan
+                {{-- SUBMIT REPORTS --}}
+                    @can('user_action_access')
+                        <li class="treeview">
+                        <a href="#submit_reports">
+                            <i class="fa fa-th-list"></i>
+                            <span>SUBMITTED REPORTS</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                            <ul class="treeview-menu" id='submit_reports'>
+                                <li>
+                                    <a href="{{ route('admin.submit_financial_reports.index') }}">
+                                        <i class="fa fa-th-list"></i>
+                                        <span>@lang('quickadmin.financial_reports.list')</span>
+                                    </a>
+                                </li>
+                            </ul>
                     </li>
                     @endcan
                 </ul>
             </li>
             @endcan
-            {{-- Change Password & Log-out --}}
+{{-- Change Password & Log-out --}}
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
-                <a href="{{ route('auth.change_password') }}">
-                    <i class="fa fa-key"></i>
-                    <span class="title">@lang('quickadmin.qa_change_password')</span>
-                </a>
             </li>
 
             <li>

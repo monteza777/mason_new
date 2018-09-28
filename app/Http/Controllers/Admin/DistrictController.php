@@ -26,7 +26,8 @@ class DistrictController extends Controller
     public function create()
     {
         $lodges = \App\Lodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-        return view('admin.district_lodges.create',compact('lodges'));
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        return view('admin.district_lodges.create',compact('lodges','users'));
     }
 
     public function store(Request $request)
@@ -61,9 +62,11 @@ class DistrictController extends Controller
         }
         $lodges = Districtlodge::findorFail($id);
         $c_lodges = \App\Lodge::get()->pluck('lodge_name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         $data = [
-            'lodges'=> $lodges,
-            'c_lodges'=> $c_lodges
+            'lodges'  => $lodges,
+            'c_lodges'=> $c_lodges,
+            'users'   => $users  
         ];
         return view('admin.district_lodges.edit')->with($data);
     }
@@ -83,6 +86,12 @@ class DistrictController extends Controller
     
     public function destroy($id)
     {
-        //
+        if (! Gate::allows('user_delete')) {
+            return redirect()->route('admin.users.index');
+        }
+        $district_lodge = Districtlodge::findOrFail($id);
+        Lodge::where('district_lodge_id',$id)->update(['district_lodge_id'=> null]);
+        $district_lodge->delete();
+        return redirect()->route('admin.district_lodges.index');
     }
 }

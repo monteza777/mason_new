@@ -110,11 +110,12 @@ return [
 	'financial_reports' => [
 		'title' => 'Financial Report',
 		'create' => 'Create',
-		'list' => 'Financial Report List',
+		'list' => 'Financial Report',
 		'fields' => [
 			'report_title' => 'Report Title',
 			'report_content' => 'Report Content',
 			'official' => 'Official',
+			'submit' => 'Submit Reports'
 		],
 	],
 	'qa_home' => 'Home',

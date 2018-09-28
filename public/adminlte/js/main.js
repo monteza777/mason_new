@@ -38,14 +38,14 @@ $(document).ready(function () {
                 extend: 'pdf',
                 text: window.pdfButtonTrans,
                 exportOptions: {
-                    columns: ':visible'
+                    columns: [1,2],
                 }
             },
             {
                 extend: 'print',
                 text: window.printButtonTrans,
                 exportOptions: {
-                    columns: ':visible'
+                    columns: [1,2],
                 }
             },
             {
@@ -74,7 +74,10 @@ $(document).ready(function () {
     });
     $(document).on( 'init.dt', function ( e, settings ) {
         if (typeof window.route_mass_crud_entries_destroy != 'undefined') {
-            $('.datatable, .ajaxTable').siblings('.actions').html('<a href="' + window.route_mass_crud_entries_destroy + '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">'+window.deleteButtonTrans+'</a>');
+            $('.datatable, .ajaxTable').siblings('.actions').html('<a href="'
+             + window.route_mass_crud_entries_destroy + 
+             '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">'
+             +window.deleteButtonTrans+'</a>');
         }
     });
 

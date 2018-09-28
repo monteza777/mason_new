@@ -28,9 +28,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('posts', 'PostController');
     Route::resource('grand_lodges', 'Admin\GrandLodgesController');
     Route::resource('district_lodges', 'Admin\DistrictController');
-    // Route::get('/admin/grand_lodges/{id}/create', 'Admin\GrandLodgesController@create');
     Route::resource('lodges', 'Admin\LodgeController');
     Route::resource('lodge_users', 'Admin\LodgeUserController');
+    Route::post('financial_reports/{financial_report}', [
+                    'uses' => 'Admin\FinancialReportController@submit',
+                    'as' =>'financial_reports.submit'
+                    ]);
     Route::resource('financial_reports', 'Admin\FinancialReportController');
+    Route::resource('submit_financial_reports', 'Admin\SubmitFRController');
 });
 Route::resource('events', 'EventController');

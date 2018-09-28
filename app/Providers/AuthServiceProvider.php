@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Role;
 use App\User;
+use App\Policies\report_secretary;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        User::class =>   report_secretary::class,
     ];
 
     /**
@@ -57,5 +59,6 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->role_id, [1, 2]);
         });
 
+        Gate::define('secretary','App\Policies\report_secretary@secretary');
     }
 }
